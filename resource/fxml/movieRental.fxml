@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.ac.tuwien.qs.movierental.ui.controller.MovieRentalController">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="Datei">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#exitApplication" text="Beenden" />
+                  <MenuItem mnemonicParsing="false" onAction="#reinitDatabase" text="Datenbank zurücksetzen" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Hilfe">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#showAbout" text="Über dieses Programm" />
+                  <MenuItem mnemonicParsing="false" onAction="#showLicense" text="Lizenzen" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        <tabs>
+            <Tab fx:id="tabMovies" closable="false" text="Filmverwaltung">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/movie.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Tab>
+          <Tab fx:id="tabCustomers" closable="false" text="Kundenverwaltung">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/users.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+          </Tab>
+          <Tab fx:id="tabRental" closable="false" text="Ausleihe / Rückgabe">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/clock.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>

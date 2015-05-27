@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/at/ac/tuwien/qs/movierental/CustomerManagementController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/at/ac/tuwien/qs/movierental/DummyCustomerDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/at/ac/tuwien/qs/movierental/DummyMovieDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/at/ac/tuwien/qs/movierental/DummyRentalDAO.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/at/ac/tuwien/qs/movierental/MovieManagementController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/at/ac/tuwien/qs/movierental/RentalController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/at/ac/tuwien/qs/movierental/SimpleInvoiceService.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/at/ac/tuwien/qs/movierental/ui/controller/MovieRentalController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/at/ac/tuwien/qs/movierental/ui/controls/EuroCell.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/at/ac/tuwien/qs/movierental/ui/controls/RentalActionButton.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/test/InvoiceTest.java" charset="UTF-8" />
+  </component>
+</project>
