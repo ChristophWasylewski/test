@@ -105,11 +105,16 @@ public class DummyCustomerDAO implements CustomerDAO {
         customers.add(customer);
         return customer;
     }
-
+    /**
+     * BugFinder
+     * hier wird customer.getId() mittels == vergleichen
+     * wobei die korrekte methode .equals(); ist !
+     *
+     */
     @Override
     public Customer read(Long id) {
         for(Customer customer : customers) {
-            if(customer.getId() == id) {
+            if(customer.getId().equals(id)) {
                 return customer;
             }
         }
