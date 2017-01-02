@@ -1,6 +1,12 @@
 package at.ac.tuwien.qs.movierental;
 
-import java.io.IOException;
+/**
+ * Checkstyle :
+ * import wird nicht benötigt -->import java.io.IOException;
+ * daher wird er entfernt
+ */
+
+
 
 public class ServiceNotAvailableException extends Exception {
     public ServiceNotAvailableException(String message) {
