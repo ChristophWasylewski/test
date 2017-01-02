@@ -1,4 +1,5 @@
 import at.ac.tuwien.qs.movierental.*;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,17 +19,19 @@ public class OldTests {
     private static Customer youngCustomer;
     private static Movie badMovie, goodMovie;
     private static Rental rental;
+    private static RentalController rentalController;
 
     @BeforeClass
     public static void setUp() {
-        youngCustomer= new Customer();
-        badMovie= new Movie();
-        goodMovie= new Movie();
-        rental= new Rental();
+        youngCustomer = new Customer();
+        badMovie = new Movie();
+        goodMovie = new Movie();
+        rental = new Rental();
+        rentalController = new RentalController();
     }
-    @Test
-    public void testRentalValidation() {
-        Customer youngCustomer = new Customer();
+
+    @Before
+    public static void beforeEachTest() {
         youngCustomer.setId(1L);
         youngCustomer.setFirstName("Linda");
         youngCustomer.setLastName("Mayer");
@@ -41,7 +44,6 @@ public class OldTests {
         youngCustomer.setPatron(true);
         youngCustomer.setPhoto(null);
         youngCustomer.setVideopoints(2);
-        Movie badMovie = new Movie();
         badMovie.setId(1L);
         badMovie.setTitle("SAW III");
         badMovie.setSubtitle("");
@@ -55,7 +57,6 @@ public class OldTests {
         badMovie.setSeries(false);
         badMovie.setStock(3);
         badMovie.setCover(null);
-        Movie goodMovie = new Movie();
         goodMovie.setId(2L);
         goodMovie.setTitle("Der Lorax");
         goodMovie.setSubtitle("");
@@ -69,8 +70,11 @@ public class OldTests {
         goodMovie.setSeries(false);
         goodMovie.setStock(8);
         goodMovie.setCover(null);
-        RentalController rentalController = new RentalController();
-        Rental rental = new Rental();
+    }
+
+    @Test
+    public void testRentalValidationGoodMovie() {
+
         // movie set
         rental.setMovie(goodMovie);
         try {
@@ -79,6 +83,10 @@ public class OldTests {
         } catch (ValidationException e) {
             assertTrue(true);
         }
+    }
+
+    @Test
+    public void testRentalValidationNull() {
         // nothing set
         rental.setMovie(null);
         try {
@@ -87,6 +95,10 @@ public class OldTests {
         } catch (ValidationException e) {
             assertTrue(true);
         }
+    }
+
+    @Test
+    public void testRentalValidationYoungCustomer() {
         // customer set
         rental.setCustomer(youngCustomer);
         try {
@@ -95,6 +107,9 @@ public class OldTests {
         } catch (ValidationException e) {
             assertTrue(true);
         }
+    }
+    @Test
+    public void testRentalValidationYoungCustomerAndBadMovie() {
         // customer and bad movie set
         rental.setMovie(badMovie);
         try {
@@ -103,6 +118,9 @@ public class OldTests {
         } catch (ValidationException e) {
             assertTrue(true);
         }
+    }
+    @Test
+    public void testRentalValidationYoungCustomerAndBadMovieLentDateSet() {
         // customer, bad movie and lent date set
         rental.setDateLent(LocalDate.now());
         try {
@@ -111,6 +129,9 @@ public class OldTests {
         } catch (ValidationException e) {
             assertTrue(true);
         }
+    }
+    @Test
+    public void testRentalValidationYoungCustomerAndGoodMovie() {
         // customer and good movie set
         rental.setDateLent(null);
         rental.setMovie(goodMovie);
@@ -120,6 +141,9 @@ public class OldTests {
         } catch (ValidationException e) {
             assertTrue(true);
         }
+    }
+    @Test
+    public void testRentalValidationYoungCustomerAndGoodMovieLentDateSet(){
         // customer, good movie and lent date set
         rental.setDateLent(LocalDate.now());
         try {
@@ -129,5 +153,6 @@ public class OldTests {
             assertTrue(false);
         }
     }
-
 }
+
+
