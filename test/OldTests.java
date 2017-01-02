@@ -17,10 +17,14 @@ public class OldTests {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd. MM. yyyy");
     private static Customer youngCustomer;
     private static Movie badMovie, goodMovie;
+    private static Rental rental;
 
     @BeforeClass
     public static void setUp() {
-
+        youngCustomer= new Customer();
+        badMovie= new Movie();
+        goodMovie= new Movie();
+        rental= new Rental();
     }
     @Test
     public void testRentalValidation() {
