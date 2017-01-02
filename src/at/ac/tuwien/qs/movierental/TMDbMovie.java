@@ -8,19 +8,34 @@ import java.util.Date;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TMDbMovie {
 
+    /**
+     * CheckStyle
+     * originalTitel muss private sein
+     */
     @JsonProperty("original_title")
-    public String originalTitle;
-
+    private String originalTitle;
+    /**
+     * CheckStyle
+     * popularity muss private sein
+     */
     @JsonProperty("popularity")
-    public Float popularity;
-
+    private Float popularity;
+    /** CheckStyle
+     * voteAverage muss private sein
+     */
     @JsonProperty("vote_average")
-    public Float voteAverage;
-
+    private Float voteAverage;
+    /**
+     * CheckStyle
+     * voteCount muss private sein
+     */
     @JsonProperty("vote_count")
-    public Integer voteCount;
-
+    private Integer voteCount;
+    /**
+     * CheckStyle
+     * releaseDate muss private sein
+     */
     @JsonProperty("release_date")
-    public Date releaseDate;
+    private Date releaseDate;
 
 }
