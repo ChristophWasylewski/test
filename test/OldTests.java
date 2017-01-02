@@ -29,9 +29,9 @@ public class OldTests {
         rental = new Rental();
         rentalController = new RentalController();
     }
-
     @Before
     public static void beforeEachTest() {
+        //yountCustomer
         youngCustomer.setId(1L);
         youngCustomer.setFirstName("Linda");
         youngCustomer.setLastName("Mayer");
@@ -44,6 +44,7 @@ public class OldTests {
         youngCustomer.setPatron(true);
         youngCustomer.setPhoto(null);
         youngCustomer.setVideopoints(2);
+        //badMovie
         badMovie.setId(1L);
         badMovie.setTitle("SAW III");
         badMovie.setSubtitle("");
@@ -57,6 +58,7 @@ public class OldTests {
         badMovie.setSeries(false);
         badMovie.setStock(3);
         badMovie.setCover(null);
+        //goodMovie
         goodMovie.setId(2L);
         goodMovie.setTitle("Der Lorax");
         goodMovie.setSubtitle("");
