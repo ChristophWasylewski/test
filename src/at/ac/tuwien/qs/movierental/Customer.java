@@ -30,7 +30,7 @@ public class Customer {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id.set(id);
     }
 
@@ -138,7 +138,7 @@ public class Customer {
         return patron;
     }
 
-    public void setPatron(Boolean patron) {
+    public void setPatron(boolean patron) {
         this.patron.set(patron);
     }
 
@@ -150,7 +150,7 @@ public class Customer {
         return videopoints;
     }
 
-    public void setVideopoints(Integer videopoints) {
+    public void setVideopoints(int videopoints) {
         this.videopoints.set(videopoints);
     }
 
@@ -202,15 +202,21 @@ public class Customer {
         return videopoints;
     }
 
+    /**
+     * FingBugs
+     * hier wurde ein float mit einem int addiert ..
+     * kann zu fehlern führen desswegen--> beide float
+     *
+     */
     public float calculateDiscount() {
         float discount = 0;
         if (this.getPatron()) {
             discount += 1.5;
         }
         if (this.getVideopoints() > 10) {
-            discount += 2;
+            discount += 2.0;
         } else if (this.getVideopoints() > 20) {
-            discount += 5;
+            discount += 5.0;
         }
         return discount;
     }
