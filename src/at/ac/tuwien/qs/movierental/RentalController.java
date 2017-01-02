@@ -72,7 +72,11 @@ public class RentalController {
     /**
      * We needed this class ages ago
      */
-    class RentalWrapper {
+    /**
+     * FindBugs hat hier einen Fehler gefunden:
+     * es sollte sich hierbei um eine statische innere Klasse handeln
+     */
+    static class RentalWrapper {
         public Rental rental;
         public boolean pay = false;
     }
