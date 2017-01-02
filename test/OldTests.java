@@ -1,4 +1,5 @@
 import at.ac.tuwien.qs.movierental.*;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -14,7 +15,13 @@ import static org.junit.Assert.assertTrue;
 public class OldTests {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd. MM. yyyy");
+    private static Customer youngCustomer;
+    private static Movie badMovie, goodMovie;
 
+    @BeforeClass
+    public static void setUp() {
+
+    }
     @Test
     public void testRentalValidation() {
         Customer youngCustomer = new Customer();
