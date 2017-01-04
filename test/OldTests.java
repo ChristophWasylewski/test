@@ -1,4 +1,5 @@
 import at.ac.tuwien.qs.movierental.*;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -32,51 +33,15 @@ public class OldTests {
     @Before
     public static void beforeEachTest() {
         //yountCustomer
-        youngCustomer.setId(1L);
-        youngCustomer.setFirstName("Linda");
-        youngCustomer.setLastName("Mayer");
-        youngCustomer.setEmail("Lucy2001@hotmail.com");
-        youngCustomer.setPhone("+43 555 61 61");
-        youngCustomer.setBirthday(LocalDate.parse("01. 04. 2010", DATE_TIME_FORMATTER));
-        youngCustomer.setAddress("Berggasse 11");
-        youngCustomer.setZipCode("3002");
-        youngCustomer.setCity("Purkersdorf");
-        youngCustomer.setPatron(true);
-        youngCustomer.setPhoto(null);
-        youngCustomer.setVideopoints(2);
+       initialYoungCustomer();
         //badMovie
-        badMovie.setId(1L);
-        badMovie.setTitle("SAW III");
-        badMovie.setSubtitle("");
-        badMovie.setGenre("Horror");
-        badMovie.setAgeRating("FSK 18");
-        badMovie.setLanguage("English");
-        badMovie.setPriceInCents(200);
-        badMovie.setDirector("");
-        badMovie.setRating(3.2F);
-        badMovie.setYearPublished(Year.of(2002));
-        badMovie.setSeries(false);
-        badMovie.setStock(3);
-        badMovie.setCover(null);
+       initalBadMovie();
         //goodMovie
-        goodMovie.setId(2L);
-        goodMovie.setTitle("Der Lorax");
-        goodMovie.setSubtitle("");
-        goodMovie.setGenre("Kinder");
-        goodMovie.setAgeRating("FSK 0");
-        goodMovie.setLanguage("German");
-        goodMovie.setPriceInCents(120);
-        goodMovie.setDirector("Chris Renaud");
-        goodMovie.setRating(3.0F);
-        goodMovie.setYearPublished(Year.of(2012));
-        goodMovie.setSeries(false);
-        goodMovie.setStock(8);
-        goodMovie.setCover(null);
+       initialGoodMovie();
     }
 
     @Test
     public void testRentalValidationGoodMovie() {
-
         // movie set
         rental.setMovie(goodMovie);
         testvalidateRental(rental);
@@ -132,6 +97,53 @@ public class OldTests {
         } catch (ValidationException e) {
             assertTrue(true);
         }
+    }
+    /**
+     * Auslagerung der initialisierung
+     */
+    private static void initialYoungCustomer(){
+        youngCustomer.setId(1L);
+        youngCustomer.setFirstName("Linda");
+        youngCustomer.setLastName("Mayer");
+        youngCustomer.setEmail("Lucy2001@hotmail.com");
+        youngCustomer.setPhone("+43 555 61 61");
+        youngCustomer.setBirthday(LocalDate.parse("01. 04. 2010", DATE_TIME_FORMATTER));
+        youngCustomer.setAddress("Berggasse 11");
+        youngCustomer.setZipCode("3002");
+        youngCustomer.setCity("Purkersdorf");
+        youngCustomer.setPatron(true);
+        youngCustomer.setPhoto(null);
+        youngCustomer.setVideopoints(2);
+    }
+    private static void initalBadMovie(){
+        badMovie.setId(1L);
+        badMovie.setTitle("SAW III");
+        badMovie.setSubtitle("");
+        badMovie.setGenre("Horror");
+        badMovie.setAgeRating("FSK 18");
+        badMovie.setLanguage("English");
+        badMovie.setPriceInCents(200);
+        badMovie.setDirector("");
+        badMovie.setRating(3.2F);
+        badMovie.setYearPublished(Year.of(2002));
+        badMovie.setSeries(false);
+        badMovie.setStock(3);
+        badMovie.setCover(null);
+    }
+    private static void initialGoodMovie(){
+        goodMovie.setId(2L);
+        goodMovie.setTitle("Der Lorax");
+        goodMovie.setSubtitle("");
+        goodMovie.setGenre("Kinder");
+        goodMovie.setAgeRating("FSK 0");
+        goodMovie.setLanguage("German");
+        goodMovie.setPriceInCents(120);
+        goodMovie.setDirector("Chris Renaud");
+        goodMovie.setRating(3.0F);
+        goodMovie.setYearPublished(Year.of(2012));
+        goodMovie.setSeries(false);
+        goodMovie.setStock(8);
+        goodMovie.setCover(null);
     }
 }
 
