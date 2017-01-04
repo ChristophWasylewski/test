@@ -79,80 +79,58 @@ public class OldTests {
 
         // movie set
         rental.setMovie(goodMovie);
-        try {
-            rentalController.validateRental(rental);
-            assertTrue(false);
-        } catch (ValidationException e) {
-            assertTrue(true);
-        }
+        testvalidateRental(rental);
     }
 
     @Test
     public void testRentalValidationNull() {
         // nothing set
         rental.setMovie(null);
-        try {
-            rentalController.validateRental(rental);
-            assertTrue(false);
-        } catch (ValidationException e) {
-            assertTrue(true);
-        }
+        testvalidateRental(rental);
     }
 
     @Test
     public void testRentalValidationYoungCustomer() {
         // customer set
         rental.setCustomer(youngCustomer);
-        try {
-            rentalController.validateRental(rental);
-            assertTrue(false);
-        } catch (ValidationException e) {
-            assertTrue(true);
-        }
+        testvalidateRental(rental);
     }
     @Test
     public void testRentalValidationYoungCustomerAndBadMovie() {
         // customer and bad movie set
         rental.setMovie(badMovie);
-        try {
-            rentalController.validateRental(rental);
-            assertTrue(false);
-        } catch (ValidationException e) {
-            assertTrue(true);
-        }
+        testvalidateRental(rental);
     }
     @Test
     public void testRentalValidationYoungCustomerAndBadMovieLentDateSet() {
         // customer, bad movie and lent date set
         rental.setDateLent(LocalDate.now());
-        try {
-            rentalController.validateRental(rental);
-            assertTrue(false);
-        } catch (ValidationException e) {
-            assertTrue(true);
-        }
+        testvalidateRental(rental);
     }
     @Test
     public void testRentalValidationYoungCustomerAndGoodMovie() {
         // customer and good movie set
         rental.setDateLent(null);
         rental.setMovie(goodMovie);
-        try {
-            rentalController.validateRental(rental);
-            assertTrue(false);
-        } catch (ValidationException e) {
-            assertTrue(true);
-        }
+        testvalidateRental(rental);
     }
     @Test
     public void testRentalValidationYoungCustomerAndGoodMovieLentDateSet(){
         // customer, good movie and lent date set
         rental.setDateLent(LocalDate.now());
+        testvalidateRental(rental);
+    }
+
+    /**
+     * um doppelten Code zu vermeide
+     * die Methode testvalidateRental(Rental rental) erstellt
+     */
+    private void testvalidateRental(Rental rental){
         try {
             rentalController.validateRental(rental);
-            assertTrue(true);
-        } catch (ValidationException e) {
             assertTrue(false);
+        } catch (ValidationException e) {
+            assertTrue(true);
         }
     }
 }
