@@ -1,0 +1,1155 @@
+Index: src/at/ac/tuwien/qs/movierental/DummyRentalDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/at/ac/tuwien/qs/movierental/DummyRentalDAO.java	(date 1483525700000)
++++ src/at/ac/tuwien/qs/movierental/DummyRentalDAO.java	(revision )
+@@ -8,6 +8,7 @@
+ 
+ public class DummyRentalDAO implements RentalDAO {
+     private AtomicLong atomicLong = new AtomicLong(0);
++    private HashSet<Rental> rentals = new HashSet<>();
+ 
+     public DummyRentalDAO(MovieDAO movieDAO, CustomerDAO customerDAO) {
+         Rental rental;
+@@ -45,8 +46,6 @@
+         }
+     }
+ 
+-    private HashSet<Rental> rentals = new HashSet<>();
+-
+     @Override
+     public Rental create(Rental rental) {
+         rental.setId(atomicLong.addAndGet(1));
+@@ -54,10 +53,15 @@
+         return rental;
+     }
+ 
++    /**
++     * BugFinder
++     * hier wird customer.getId() mittels == vergleichen
++     * wobei die korrekte methode .equals(); ist !
++     */
+     @Override
+     public Rental read(Long id) {
+         for (Rental rental : rentals) {
+-            if (rental.getId() == id) {
++            if (rental.getId().equals(id)) {
+                 return rental;
+             }
+         }
+Index: src/at/ac/tuwien/qs/movierental/Movie.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/at/ac/tuwien/qs/movierental/Movie.java	(date 1483525700000)
++++ src/at/ac/tuwien/qs/movierental/Movie.java	(revision )
+@@ -26,158 +26,158 @@
+         return id.get();
+     }
+ 
++    public void setId(long id) {
++        this.id.set(id);
++    }
++
+     public ObjectProperty<Long> idProperty() {
+         return id;
+     }
+ 
+-    public void setId(Long id) {
+-        this.id.set(id);
+-    }
+-
+     public String getTitle() {
+         return title.get();
+     }
+ 
+-    public ObjectProperty<String> titleProperty() {
+-        return title;
+-    }
+-
+     public void setTitle(String title) {
+         this.title.set(title);
+     }
+ 
++    public ObjectProperty<String> titleProperty() {
++        return title;
++    }
++
+     public String getSubtitle() {
+         return subtitle.get();
+     }
+ 
+-    public ObjectProperty<String> subtitleProperty() {
+-        return subtitle;
+-    }
+-
+     public void setSubtitle(String subtitle) {
+         this.subtitle.set(subtitle);
+     }
+ 
++    public ObjectProperty<String> subtitleProperty() {
++        return subtitle;
++    }
++
+     public String getGenre() {
+         return genre.get();
+     }
+ 
+-    public ObjectProperty<String> genreProperty() {
+-        return genre;
+-    }
+-
+     public void setGenre(String genre) {
+         this.genre.set(genre);
+     }
+ 
++    public ObjectProperty<String> genreProperty() {
++        return genre;
++    }
++
+     public String getAgeRating() {
+         return ageRating.get();
+     }
+ 
+-    public ObjectProperty<String> ageRatingProperty() {
+-        return ageRating;
+-    }
+-
+     public void setAgeRating(String ageRating) {
+         this.ageRating.set(ageRating);
+     }
+ 
++    public ObjectProperty<String> ageRatingProperty() {
++        return ageRating;
++    }
++
+     public String getLanguage() {
+         return language.get();
+     }
+ 
+-    public ObjectProperty<String> languageProperty() {
+-        return language;
+-    }
+-
+     public void setLanguage(String language) {
+         this.language.set(language);
+     }
+ 
++    public ObjectProperty<String> languageProperty() {
++        return language;
++    }
++
+     public Integer getPriceInCents() {
+         return priceInCents.get();
+     }
+ 
++    public void setPriceInCents(int priceInCents) {
++        this.priceInCents.set(priceInCents);
++    }
++
+     public ObjectProperty<Integer> priceInCentsProperty() {
+         return priceInCents;
+     }
+ 
+-    public void setPriceInCents(Integer priceInCents) {
+-        this.priceInCents.set(priceInCents);
+-    }
+-
+     public String getDirector() {
+         return director.get();
+     }
+ 
+-    public ObjectProperty<String> directorProperty() {
+-        return director;
+-    }
+-
+     public void setDirector(String director) {
+         this.director.set(director);
+     }
+ 
++    public ObjectProperty<String> directorProperty() {
++        return director;
++    }
++
+     public Float getRating() {
+         return rating.get();
+     }
+ 
++    public void setRating(float rating) {
++        this.rating.set(rating);
++    }
++
+     public ObjectProperty<Float> ratingProperty() {
+         return rating;
+     }
+ 
+-    public void setRating(Float rating) {
+-        this.rating.set(rating);
+-    }
+-
+     public Year getYearPublished() {
+         return yearPublished.get();
+     }
+ 
+-    public ObjectProperty<Year> yearPublishedProperty() {
+-        return yearPublished;
+-    }
+-
+     public void setYearPublished(Year yearPublished) {
+         this.yearPublished.set(yearPublished);
+     }
+ 
++    public ObjectProperty<Year> yearPublishedProperty() {
++        return yearPublished;
++    }
++
+     public Boolean getSeries() {
+         return series.get();
+     }
+ 
++    public void setSeries(boolean series) {
++        this.series.set(series);
++    }
++
+     public ObjectProperty<Boolean> seriesProperty() {
+         return series;
+     }
+ 
+-    public void setSeries(Boolean series) {
+-        this.series.set(series);
+-    }
+-
+     public Integer getStock() {
+         return stock.get();
+     }
+ 
++    public void setStock(int stock) {
++        this.stock.set(stock);
++    }
++
+     public ObjectProperty<Integer> stockProperty() {
+         return stock;
+     }
+ 
+-    public void setStock(Integer stock) {
+-        this.stock.set(stock);
+-    }
+-
+     public File getCover() {
+         return cover.get();
+     }
+ 
+-    public ObjectProperty<File> coverProperty() {
+-        return cover;
+-    }
+-
+     public void setCover(File cover) {
+         this.cover.set(cover);
+     }
+ 
++    public ObjectProperty<File> coverProperty() {
++        return cover;
++    }
++
+     @Override
+     public boolean equals(Object o) {
+         if (this == o) return true;
+Index: test/OldTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- test/OldTests.java	(date 1483525700000)
++++ test/OldTests.java	(revision )
+@@ -8,8 +8,6 @@
+ import java.time.Year;
+ import java.time.format.DateTimeFormatter;
+ 
+-import static org.junit.Assert.assertTrue;
+-
+ /**
+  * These are some old tests. I refactored the name of the class.
+  * If anyone has the time please refactor these tests.
+@@ -31,6 +29,72 @@
+         rental = new Rental();
+         rentalController = new RentalController();
+     }
++
++    /**
++     * Auslagerung der initialisierung
++     */
++    private static void initialYoungCustomer() {
++        youngCustomer.setId(1L);
++        youngCustomer.setFirstName("Linda");
++        youngCustomer.setLastName("Mayer");
++        youngCustomer.setEmail("Lucy2001@hotmail.com");
++        youngCustomer.setPhone("+43 555 61 61");
++        youngCustomer.setBirthday(LocalDate.parse("01. 04. 2010", DATE_TIME_FORMATTER));
++        youngCustomer.setAddress("Berggasse 11");
++        youngCustomer.setZipCode("3002");
++        youngCustomer.setCity("Purkersdorf");
++        youngCustomer.setPatron(true);
++        youngCustomer.setPhoto(null);
++        youngCustomer.setVideopoints(2);
++    }
++
++    private static void initialOldCustomer() {
++        oldCustomer.setId(1L);
++        oldCustomer.setFirstName("Linda");
++        oldCustomer.setLastName("Mayer");
++        oldCustomer.setEmail("Lucy2001@hotmail.com");
++        oldCustomer.setPhone("+43 555 61 61");
++        oldCustomer.setBirthday(LocalDate.parse("01. 04. 1970", DATE_TIME_FORMATTER));
++        oldCustomer.setAddress("Berggasse 11");
++        oldCustomer.setZipCode("3002");
++        oldCustomer.setCity("Purkersdorf");
++        oldCustomer.setPatron(true);
++        oldCustomer.setPhoto(null);
++        oldCustomer.setVideopoints(2);
++    }
++
++    private static void initalBadMovie() {
++        badMovie.setId(1L);
++        badMovie.setTitle("SAW III");
++        badMovie.setSubtitle("");
++        badMovie.setGenre("Horror");
++        badMovie.setAgeRating("FSK 18");
++        badMovie.setLanguage("English");
++        badMovie.setPriceInCents(200);
++        badMovie.setDirector("");
++        badMovie.setRating(3.2F);
++        badMovie.setYearPublished(Year.of(2002));
++        badMovie.setSeries(false);
++        badMovie.setStock(3);
++        badMovie.setCover(null);
++    }
++
++    private static void initialGoodMovie() {
++        goodMovie.setId(2L);
++        goodMovie.setTitle("Der Lorax");
++        goodMovie.setSubtitle("");
++        goodMovie.setGenre("Kinder");
++        goodMovie.setAgeRating("FSK 0");
++        goodMovie.setLanguage("German");
++        goodMovie.setPriceInCents(120);
++        goodMovie.setDirector("Chris Renaud");
++        goodMovie.setRating(3.0F);
++        goodMovie.setYearPublished(Year.of(2012));
++        goodMovie.setSeries(false);
++        goodMovie.setStock(8);
++        goodMovie.setCover(null);
++    }
++
+     @Before
+     public void beforeEachTest() {
+         //yountCustomer
+@@ -39,12 +103,14 @@
+        initalBadMovie();
+         //goodMovie
+        initialGoodMovie();
+-       //oldCustomer
++
++        //oldCustomer
+         initialOldCustomer();
+        rental= new Rental();
+        rentalController=new RentalController();
+ 
+     }
++
+     @After
+     public void afterEachTest(){
+         System.out.println("");
+@@ -69,6 +135,7 @@
+         rental.setMovie(goodMovie);
+         testvalidateRental(rental);
+     }
++
+     /**
+      * Only customer is set --> ValidationException("Film muss gesetzt sein.");
+      */
+@@ -148,67 +215,6 @@
+                 System.out.println(e);
+             }
+     }
+-    /**
+-     * Auslagerung der initialisierung
+-     */
+-    private static void initialYoungCustomer(){
+-        youngCustomer.setId(1L);
+-        youngCustomer.setFirstName("Linda");
+-        youngCustomer.setLastName("Mayer");
+-        youngCustomer.setEmail("Lucy2001@hotmail.com");
+-        youngCustomer.setPhone("+43 555 61 61");
+-        youngCustomer.setBirthday(LocalDate.parse("01. 04. 2010", DATE_TIME_FORMATTER));
+-        youngCustomer.setAddress("Berggasse 11");
+-        youngCustomer.setZipCode("3002");
+-        youngCustomer.setCity("Purkersdorf");
+-        youngCustomer.setPatron(true);
+-        youngCustomer.setPhoto(null);
+-        youngCustomer.setVideopoints(2);
+-    }
+-    private static void initialOldCustomer(){
+-        oldCustomer.setId(1L);
+-        oldCustomer.setFirstName("Linda");
+-        oldCustomer.setLastName("Mayer");
+-        oldCustomer.setEmail("Lucy2001@hotmail.com");
+-        oldCustomer.setPhone("+43 555 61 61");
+-        oldCustomer.setBirthday(LocalDate.parse("01. 04. 1970", DATE_TIME_FORMATTER));
+-        oldCustomer.setAddress("Berggasse 11");
+-        oldCustomer.setZipCode("3002");
+-        oldCustomer.setCity("Purkersdorf");
+-        oldCustomer.setPatron(true);
+-        oldCustomer.setPhoto(null);
+-        oldCustomer.setVideopoints(2);
+-    }
+-    private static void initalBadMovie(){
+-        badMovie.setId(1L);
+-        badMovie.setTitle("SAW III");
+-        badMovie.setSubtitle("");
+-        badMovie.setGenre("Horror");
+-        badMovie.setAgeRating("FSK 18");
+-        badMovie.setLanguage("English");
+-        badMovie.setPriceInCents(200);
+-        badMovie.setDirector("");
+-        badMovie.setRating(3.2F);
+-        badMovie.setYearPublished(Year.of(2002));
+-        badMovie.setSeries(false);
+-        badMovie.setStock(3);
+-        badMovie.setCover(null);
+-    }
+-    private static void initialGoodMovie(){
+-        goodMovie.setId(2L);
+-        goodMovie.setTitle("Der Lorax");
+-        goodMovie.setSubtitle("");
+-        goodMovie.setGenre("Kinder");
+-        goodMovie.setAgeRating("FSK 0");
+-        goodMovie.setLanguage("German");
+-        goodMovie.setPriceInCents(120);
+-        goodMovie.setDirector("Chris Renaud");
+-        goodMovie.setRating(3.0F);
+-        goodMovie.setYearPublished(Year.of(2012));
+-        goodMovie.setSeries(false);
+-        goodMovie.setStock(8);
+-        goodMovie.setCover(null);
+-    }
+ }
+ 
+ 
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .gitignore	(date 1483525700000)
++++ .gitignore	(revision )
+@@ -209,3 +209,5 @@
+ 
+ # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+ # gradle/wrapper/gradle-wrapper.properties
++lib/
++/.gitignore
+Index: src/at/ac/tuwien/qs/movierental/TMDbResult.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/at/ac/tuwien/qs/movierental/TMDbResult.java	(date 1483525700000)
++++ src/at/ac/tuwien/qs/movierental/TMDbResult.java	(revision )
+@@ -9,9 +9,24 @@
+ public class TMDbResult {
+ 
+     @JsonProperty("results")
+-    public ArrayList<TMDbMovie> movies;
++    private ArrayList<TMDbMovie> movies;
+ 
+     @JsonProperty("total_results")
+-    public Integer totalResults;
++    private Integer totalResults;
+ 
++    public ArrayList<TMDbMovie> getMovies() {
++        return movies;
++    }
++
++    public void setMovies(ArrayList<TMDbMovie> movies) {
++        this.movies = movies;
++    }
++
++    public Integer getTotalResults() {
++        return totalResults;
++    }
++
++    public void setTotalResults(Integer totalResults) {
++        this.totalResults = totalResults;
++    }
+ }
+\ No newline at end of file
+Index: src/at/ac/tuwien/qs/movierental/CustomerManagementController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/at/ac/tuwien/qs/movierental/CustomerManagementController.java	(date 1483525700000)
++++ src/at/ac/tuwien/qs/movierental/CustomerManagementController.java	(revision )
+@@ -24,7 +24,7 @@
+ public class CustomerManagementController {
+ 
+     private static final Image NO_PHOTO = new Image(RentalController.class.getResourceAsStream("/images/user.png"));
+-
++    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd. MM. yyyy");
+     @FXML
+     private TableView<Customer> tblCustomers;
+     @FXML
+@@ -73,20 +73,14 @@
+     private Label lblVideopoints;
+     @FXML
+     private ImageView imgPhoto;
+-
+     @FXML
+     private TextField txtFilter;
+     @FXML
+     private ToggleButton tglFilter;
+-
+     private File filePhoto;
+-
+     private Customer currentCustomer;
+-
+     private ObservableList<Customer> customerObservableList;
+     private FilteredList<Customer> filteredCustomers;
+-
+-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd. MM. yyyy");
+     private CustomerDAO customerDAO;
+ 
+     @FXML
+@@ -246,18 +240,9 @@
+         if (this.txtZipCode.getText().length() < 2 || this.txtZipCode.getText().length() > 250) {
+             errorMessage += "Die Postleitzahl muss zwischen 2 und 250 Zeichen lang sein.\n";
+         }
+-        try {
+-            LocalDate bday = LocalDate.parse(this.txtBirthday.getText()
+-                    .replaceAll("\\s", "")
+-                    .replaceAll("(^\\d\\.)", "0$1")
+-                    .replaceAll("(\\.)(\\d\\.)", ".0$2")
+-                    .replaceAll("\\.", ". "), DATE_TIME_FORMATTER);
+-            if (bday.isBefore(LocalDate.now().minusYears(120L)) || bday.isAfter(LocalDate.now())) {
+-                errorMessage += "Das eingegebene Geburtsdatum darf maximal 120 Jahre in der Vergangenheit liegen.\n";
+-            }
+-        } catch (DateTimeParseException e) {
+-            errorMessage += "Das eingegebene Geburtsdatum ist ungültig.\n";
+-        }
++        //Extract Methode
++        errorMessage = checkBDay(errorMessage);
++
+         if (!errorMessage.isEmpty()) {
+             Alert alert = new Alert(Alert.AlertType.ERROR);
+             alert.setTitle("Filmverleih | Eingabefehler");
+@@ -294,6 +279,22 @@
+         }
+     }
+ 
++    //Extract Methode
++    public String checkBDay(String errorMessage) {
++        try {
++            LocalDate bday = LocalDate.parse(this.txtBirthday.getText()
++                    .replaceAll("\\s", "")
++                    .replaceAll("(^\\d\\.)", "0$1")
++                    .replaceAll("(\\.)(\\d\\.)", ".0$2")
++                    .replaceAll("\\.", ". "), DATE_TIME_FORMATTER);
++            if (bday.isBefore(LocalDate.now().minusYears(120L)) || bday.isAfter(LocalDate.now())) {
++                errorMessage += "Das eingegebene Geburtsdatum darf maximal 120 Jahre in der Vergangenheit liegen.\n";
++            }
++        } catch (DateTimeParseException e) {
++            errorMessage += "Das eingegebene Geburtsdatum ist ungültig.\n";
++        }
++        return errorMessage;
++    }
+     @FXML
+     private void reset() {
+         this.tblCustomers.getSelectionModel().clearSelection();
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(date 1483525700000)
++++ .idea/misc.xml	(revision )
+@@ -1,5 +1,24 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="CheckstyleConfigurable">
++    <option name="suppFilterFilename" value="" />
++    <option name="suppCommentFilter" value="false" />
++    <option name="offComment" value="CHECKSTYLE\:OFF" />
++    <option name="onComment" value="CHECKSTYLE\:ON" />
++    <option name="checkFormat" value=".*" />
++    <option name="messageFormat" value="" />
++    <option name="checkCPP" value="true" />
++    <option name="checkC" value="true" />
++    <option name="suppNearbyCommentFilter" value="false" />
++    <option name="snCommentFormat" value="SUPPRESS CHECKSTYLE (\w+)" />
++    <option name="snCheckFormat" value="$1" />
++    <option name="snMessageFormat" value="" />
++    <option name="snInfluenceFormat" value="0" />
++    <option name="snCheckCPP" value="true" />
++    <option name="snCheckC" value="true" />
++    <option name="pathToUserRulesConfiguration" value="" />
++    <option name="pathToJarWithRules" value="" />
++  </component>
+   <component name="ClientPropertiesManager">
+     <properties class="javax.swing.AbstractButton">
+       <property name="hideActionText" class="java.lang.Boolean" />
+@@ -38,20 +57,19 @@
+       <property name="caretWidth" class="java.lang.Integer" />
+     </properties>
+   </component>
+-  <component name="EntryPointsManager">
+-    <entry_points version="2.0" />
++  <component name="FindBugsConfigurable">
++    <option name="make" value="true" />
++    <option name="effort" value="default" />
++    <option name="priority" value="Medium" />
++    <option name="excludeFilter" value="" />
+   </component>
+-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+-    <OptionsSetting value="true" id="Add" />
+-    <OptionsSetting value="true" id="Remove" />
+-    <OptionsSetting value="true" id="Checkout" />
+-    <OptionsSetting value="true" id="Update" />
+-    <OptionsSetting value="true" id="Status" />
+-    <OptionsSetting value="true" id="Edit" />
+-    <ConfirmationsSetting value="0" id="Add" />
+-    <ConfirmationsSetting value="0" id="Remove" />
+-  </component>
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="IntelliJ IDEA IU-163.10154.41" project-jdk-type="IDEA JDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
++  <component name="QAPlugAnalysisUIOptions">
++    <option name="SPLITTER_PROPORTION" value="0.68922305" />
++  </component>
++  <component name="SuppressionsComponent">
++    <option name="suppComments" value="[]" />
++  </component>
+ </project>
+\ No newline at end of file
+Index: src/at/ac/tuwien/qs/movierental/DummyMovieDAO.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/at/ac/tuwien/qs/movierental/DummyMovieDAO.java	(date 1483525700000)
++++ src/at/ac/tuwien/qs/movierental/DummyMovieDAO.java	(revision )
+@@ -8,6 +8,7 @@
+ 
+ public class DummyMovieDAO implements MovieDAO {
+     private AtomicLong atomicLong = new AtomicLong(0);
++    private HashSet<Movie> movies = new HashSet<>();
+ 
+     public DummyMovieDAO() {
+         Movie movie;
+@@ -98,8 +99,6 @@
+         }
+     }
+ 
+-    private HashSet<Movie> movies = new HashSet<>();
+-
+     @Override
+     public Movie create(Movie movie) {
+         movie.setId(atomicLong.addAndGet(1));
+@@ -107,10 +106,15 @@
+         return movie;
+     }
+ 
++    /**
++     * BugFinder
++     * hier wird customer.getId() mittels == vergleichen
++     * wobei die korrekte methode .equals(); ist !
++     */
+     @Override
+     public Movie read(Long id) {
+         for (Movie movie : movies) {
+-            if (movie.getId() == id) {
++            if (movie.getId().equals(id)) {
+                 return movie;
+             }
+         }
+Index: src/at/ac/tuwien/qs/movierental/RentalController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/at/ac/tuwien/qs/movierental/RentalController.java	(date 1483525700000)
++++ src/at/ac/tuwien/qs/movierental/RentalController.java	(revision )
+@@ -19,6 +19,8 @@
+ 
+ public class RentalController {
+ 
++    private static final Image CUSTOMER_SELECTED = new Image(RentalController.class.getResourceAsStream("/images/deselectUser.png"));
++    private static final Image NO_CUSTOMER_SELECTED = new Image(RentalController.class.getResourceAsStream("/images/selectUser.png"));
+     @FXML
+     private TextField txtSearchCustomer;
+     @FXML
+@@ -47,10 +49,6 @@
+     private TextArea txtInvoice;
+     @FXML
+     private Button btnCompleteRental;
+-
+-    private static final Image CUSTOMER_SELECTED = new Image(RentalController.class.getResourceAsStream("/images/deselectUser.png"));
+-    private static final Image NO_CUSTOMER_SELECTED = new Image(RentalController.class.getResourceAsStream("/images/selectUser.png"));
+-
+     private ObservableList<Rental> rentalObservableList = FXCollections.observableArrayList();
+     private FilteredList<Movie> filteredMovies;
+     private FilteredList<Customer> filteredCustomers;
+@@ -72,14 +70,6 @@
+     /**
+      * We needed this class ages ago
+      */
+-    /**
+-     * FindBugs hat hier einen Fehler gefunden:
+-     * es sollte sich hierbei um eine statische innere Klasse handeln
+-     */
+-    static class RentalWrapper {
+-        public Rental rental;
+-        public boolean pay = false;
+-    }
+ 
+     @FXML
+     private void initialize() {
+@@ -297,8 +287,17 @@
+                 throw new ValidationException("Der Kunde erfüllt die Altersfreigabe nicht! (" + rental.getMovie().getAgeRating() + ")");
+             }
+         } else {
+-            throw new IllegalArgumentException("Rental has to be not null");
++            throw new ValidationException("Rental has to be not null");
+         }
+ 
++    }
++
++    /**
++     * FindBugs hat hier einen Fehler gefunden:
++     * es sollte sich hierbei um eine statische innere Klasse handeln
++     */
++    static class RentalWrapper {
++        public Rental rental;
++        public boolean pay = false;
+     }
+ }
+Index: src/at/ac/tuwien/qs/movierental/TMDbMovie.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/at/ac/tuwien/qs/movierental/TMDbMovie.java	(date 1483525700000)
++++ src/at/ac/tuwien/qs/movierental/TMDbMovie.java	(revision )
+@@ -31,6 +31,7 @@
+      */
+     @JsonProperty("vote_count")
+     private Integer voteCount;
++
+     /**
+      * CheckStyle
+      * releaseDate muss private sein
+@@ -38,4 +39,43 @@
+     @JsonProperty("release_date")
+     private Date releaseDate;
+ 
++    public String getOriginalTitle() {
++        return originalTitle;
++    }
++
++    public void setOriginalTitle(String originalTitle) {
++        this.originalTitle = originalTitle;
++    }
++
++    public Float getPopularity() {
++        return popularity;
++    }
++
++    public void setPopularity(Float popularity) {
++        this.popularity = popularity;
++    }
++
++    public Float getVoteAverage() {
++        return voteAverage;
++    }
++
++    public void setVoteAverage(Float voteAverage) {
++        this.voteAverage = voteAverage;
++    }
++
++    public Integer getVoteCount() {
++        return voteCount;
++    }
++
++    public void setVoteCount(Integer voteCount) {
++        this.voteCount = voteCount;
++    }
++
++    public Date getReleaseDate() {
++        return releaseDate;
++    }
++
++    public void setReleaseDate(Date releaseDate) {
++        this.releaseDate = releaseDate;
++    }
+ }
+\ No newline at end of file
+Index: src/at/ac/tuwien/qs/movierental/TheMovieDbMovieDataService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/at/ac/tuwien/qs/movierental/TheMovieDbMovieDataService.java	(date 1483525700000)
++++ src/at/ac/tuwien/qs/movierental/TheMovieDbMovieDataService.java	(revision )
+@@ -9,7 +9,9 @@
+ import java.net.URL;
+ import java.net.URLEncoder;
+ import java.time.Year;
+-import java.util.*;
++import java.util.ArrayList;
++import java.util.Calendar;
++import java.util.List;
+ 
+ 
+ /**
+@@ -59,15 +61,15 @@
+             System.out.println("Response was: " + response);
+             ObjectMapper mapper = new ObjectMapper();
+             TMDbResult tmDbResult = mapper.readValue(response.toString(), TMDbResult.class);
+-            for (TMDbMovie tmDbMovie : tmDbResult.movies) {
++            for (TMDbMovie tmDbMovie : tmDbResult.getMovies()) {
+                 Movie resultMovie = new Movie();
+-                String[] titles = tmDbMovie.originalTitle.split("\\-", 2);
++                String[] titles = tmDbMovie.getOriginalTitle().split("\\-", 2);
+                 resultMovie.setTitle(titles[0].trim());
+                 if (titles.length == 2) {
+                     resultMovie.setSubtitle(titles[1].trim());
+                 }
+-                resultMovie.setRating(tmDbMovie.voteAverage);
+-                CALENDAR.setTime(tmDbMovie.releaseDate);
++                resultMovie.setRating(tmDbMovie.getVoteAverage());
++                CALENDAR.setTime(tmDbMovie.getReleaseDate());
+                 resultMovie.setYearPublished(Year.of(CALENDAR.get(Calendar.YEAR)));
+                 returnMovies.add(resultMovie);
+             }
+Index: .idea/checkstyle-idea.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/checkstyle-idea.xml	(revision )
++++ .idea/checkstyle-idea.xml	(revision )
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="CheckStyle-IDEA">
++    <option name="configuration">
++      <map>
++        <entry key="scan-before-checkin" value="false" />
++      </map>
++    </option>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/at/ac/tuwien/qs/movierental/Customer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/at/ac/tuwien/qs/movierental/Customer.java	(date 1483525700000)
++++ src/at/ac/tuwien/qs/movierental/Customer.java	(revision )
+@@ -22,150 +22,188 @@
+     private ObjectProperty<Integer> videopoints = new SimpleObjectProperty<>(0);
+     private ObjectProperty<File> photo = new SimpleObjectProperty<>(null);
+ 
++    public static int calculateVideopointsGain(long priceInCent, boolean patron) {
++        int videopoints = 0;
++        if (patron) {
++            videopoints++;
++        }
++        long euro = priceInCent / 100;
++        videopoints += euro / 2;
++        return videopoints;
++    }
++
++    public static long calculatePriceForRental(Rental rental, LocalDate returnDate) {
++        long totalPrice = 0;
++        float factor = 1f;
++        switch (rental.getMovie().getGenre()) {
++            case "Normal":
++                factor = 1f;
++                break;
++            case "Kinder":
++                factor = 0.75f;
++                break;
++            case "Klassiker":
++                factor = 0.9f;
++                break;
++            case "Horror":
++                factor = 1.1f;
++                break;
++            case "SciFi":
++                factor = 1.15f;
++                break;
++            case "Fantasy":
++                factor = 1.25f;
++                break;
++        }
++        long days = ChronoUnit.DAYS.between(rental.getDateLent(), returnDate) + 1;
++        long priceInCents = rental.getMovie().getPriceInCents();
++        return (long) (priceInCents * days * factor);
++    }
++
+     public Long getId() {
+         return id.get();
+     }
+ 
+-    public ObjectProperty<Long> idProperty() {
+-        return id;
+-    }
+-
+     public void setId(long id) {
+         this.id.set(id);
+     }
+ 
++    public ObjectProperty<Long> idProperty() {
++        return id;
++    }
++
+     public String getFirstName() {
+         return firstName.get();
+     }
+ 
+-    public ObjectProperty<String> firstNameProperty() {
+-        return firstName;
+-    }
+-
+     public void setFirstName(String firstName) {
+         this.firstName.set(firstName);
+     }
+ 
++    public ObjectProperty<String> firstNameProperty() {
++        return firstName;
++    }
++
+     public String getLastName() {
+         return lastName.get();
+     }
+ 
+-    public ObjectProperty<String> lastNameProperty() {
+-        return lastName;
+-    }
+-
+     public void setLastName(String lastName) {
+         this.lastName.set(lastName);
+     }
+ 
++    public ObjectProperty<String> lastNameProperty() {
++        return lastName;
++    }
++
+     public String getEmail() {
+         return email.get();
+     }
+ 
+-    public ObjectProperty<String> emailProperty() {
+-        return email;
+-    }
+-
+     public void setEmail(String email) {
+         this.email.set(email);
+     }
+ 
++    public ObjectProperty<String> emailProperty() {
++        return email;
++    }
++
+     public String getPhone() {
+         return phone.get();
+     }
+ 
+-    public ObjectProperty<String> phoneProperty() {
+-        return phone;
+-    }
+-
+     public void setPhone(String phone) {
+         this.phone.set(phone);
+     }
+ 
++    public ObjectProperty<String> phoneProperty() {
++        return phone;
++    }
++
+     public LocalDate getBirthday() {
+         return birthday.get();
+     }
+ 
+-    public ObjectProperty<LocalDate> birthdayProperty() {
+-        return birthday;
+-    }
+-
+     public void setBirthday(LocalDate birthday) {
+         this.birthday.set(birthday);
+     }
+ 
++    public ObjectProperty<LocalDate> birthdayProperty() {
++        return birthday;
++    }
++
+     public String getAddress() {
+         return address.get();
+     }
+ 
+-    public ObjectProperty<String> addressProperty() {
+-        return address;
+-    }
+-
+     public void setAddress(String address) {
+         this.address.set(address);
+     }
+ 
++    public ObjectProperty<String> addressProperty() {
++        return address;
++    }
++
+     public String getZipCode() {
+         return zipCode.get();
+     }
+ 
+-    public ObjectProperty<String> zipCodeProperty() {
+-        return zipCode;
+-    }
+-
+     public void setZipCode(String zipCode) {
+         this.zipCode.set(zipCode);
+     }
+ 
++    public ObjectProperty<String> zipCodeProperty() {
++        return zipCode;
++    }
++
+     public String getCity() {
+         return city.get();
+     }
+ 
+-    public ObjectProperty<String> cityProperty() {
+-        return city;
+-    }
+-
+     public void setCity(String city) {
+         this.city.set(city);
+     }
+ 
++    public ObjectProperty<String> cityProperty() {
++        return city;
++    }
++
+     public Boolean getPatron() {
+         return patron.get();
+     }
+ 
+-    public ObjectProperty<Boolean> patronProperty() {
+-        return patron;
+-    }
+-
+     public void setPatron(boolean patron) {
+         this.patron.set(patron);
+     }
+ 
++    public ObjectProperty<Boolean> patronProperty() {
++        return patron;
++    }
++
+     public Integer getVideopoints() {
+         return videopoints.get();
+     }
+ 
+-    public ObjectProperty<Integer> videopointsProperty() {
+-        return videopoints;
+-    }
+-
+     public void setVideopoints(int videopoints) {
+         this.videopoints.set(videopoints);
+     }
+ 
++    public ObjectProperty<Integer> videopointsProperty() {
++        return videopoints;
++    }
++
+     public File getPhoto() {
+         return photo.get();
+     }
+ 
+-    public ObjectProperty<File> photoProperty() {
+-        return photo;
+-    }
+-
+     public void setPhoto(File photo) {
+         this.photo.set(photo);
+     }
+ 
++    public ObjectProperty<File> photoProperty() {
++        return photo;
++    }
++
+     @Override
+     public String toString() {
+         return "Customer{" +
+@@ -192,20 +230,9 @@
+         return id != null ? id.hashCode() : 0;
+     }
+ 
+-    public static int calculateVideopointsGain(long priceInCent, boolean patron) {
+-        int videopoints = 0;
+-        if (patron) {
+-            videopoints++;
+-        }
+-        long euro = priceInCent / 100;
+-        videopoints += euro / 2;
+-        return videopoints;
+-    }
+-
+     /**
+      * FingBugs
+-     * hier wurde ein float mit einem int addiert ..
+-     * kann zu fehlern führen desswegen--> beide float
++     * hier wird addiert und
+      *
+      */
+     public float calculateDiscount() {
+@@ -221,33 +248,5 @@
+         return discount;
+     }
+ 
+-    public static long calculatePriceForRental(Rental rental, LocalDate returnDate) {
+-        long totalPrice = 0;
+-        float factor = 1f;
+-        switch (rental.getMovie().getGenre()) {
+-            case "Normal":
+-                factor = 1f;
+-                break;
+-            case "Kinder":
+-                factor = 0.75f;
+-                break;
+-            case "Klassiker":
+-                factor = 0.9f;
+-                break;
+-            case "Horror":
+-                factor = 1.1f;
+-                break;
+-            case "SciFi":
+-                factor = 1.15f;
+-                break;
+-            case "Fantasy":
+-                factor = 1.25f;
+-                break;
+-        }
+-        long days = ChronoUnit.DAYS.between(rental.getDateLent(), returnDate) + 1;
+-        long priceInCents = rental.getMovie().getPriceInCents();
+-        return (long) (priceInCents * days * factor);
+-    }
+-
+ }
+ 

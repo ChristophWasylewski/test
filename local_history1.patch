@@ -1,0 +1,30 @@
+Index: src/at/ac/tuwien/qs/movierental/Customer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/at/ac/tuwien/qs/movierental/Customer.java	(revision )
++++ src/at/ac/tuwien/qs/movierental/Customer.java	(revision )
+@@ -202,15 +202,20 @@
+         return videopoints;
+     }
+ 
++    /**
++     * FingBugs
++     * hier wird addiert und
++     *
++     */
+     public float calculateDiscount() {
+         float discount = 0;
+         if (this.getPatron()) {
+             discount += 1.5;
+         }
+         if (this.getVideopoints() > 10) {
+-            discount += 2;
++            discount += 2.0;
+         } else if (this.getVideopoints() > 20) {
+-            discount += 5;
++            discount += 5.0;
+         }
+         return discount;
+     }
